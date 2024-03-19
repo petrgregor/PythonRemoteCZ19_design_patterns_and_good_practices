@@ -83,16 +83,31 @@ class ValorantGameCreator(GameFactory):
         return PCGame("Valorant", "FPS", 4, 10, True)
 
 
-# TODO: create new game
+class SettlersGameCreator(GameFactory):
+    def create(self):
+        return BoardGame("Settlers", "Family game", 3, 4)
+
+
+class HeroesGameCreator(GameFactory):
+    def create(self):
+        return PCGame("Heroes", "Strategy", 1, 8, True)
 
 
 def main():
     game_type = input("Enter the type of game [PC, Board]: ")
     game_factory = None
     if game_type == "PC":
-        game_factory = ValorantGameCreator()
+        pc_game_type = input("Select type Valorant or Heroes [V, H]: ")
+        if pc_game_type == "V":
+            game_factory = ValorantGameCreator()
+        elif pc_game_type == "H":
+            game_factory = HeroesGameCreator()
     elif game_type == "Board":
-        game_factory = MonopolyGameCreator()
+        board_game_type = input("Select type Monopoly or Settlers [M, S]: ")
+        if board_game_type == "M":
+            game_factory = MonopolyGameCreator()
+        elif board_game_type == "S":
+            game_factory = SettlersGameCreator()
 
     if game_factory:
         game = game_factory.create()
